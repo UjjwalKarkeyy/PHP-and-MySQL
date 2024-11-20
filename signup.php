@@ -3,37 +3,40 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-{
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   include 'connect.php';
   $username = $_POST['username'];
   $password = $_POST['psw'];
 
-  try{
-  $sql = "insert into `registration`(username,password) values('$username','$password')";
-  $result = mysqli_query($conn,$sql);
+    $check = "select * from `registration` where username = '$username'";
+    $result = $conn->query($check);
 
-  if($result)
-  {
-    echo "Registration Successful";
-  } 
-
-  else
-    echo "ERROR: ". mysqli_error($conn);
-}
-
-  catch (mysqli_sql_exception $e)
-  {
-    if($e ->getCode() == 1062)
+    if($result)
     {
-      echo "Username already exists";
-    }    
+      $num = mysqli_num_rows($result);
+      if($num != 0)
+      {
+        echo "Username alrady exists!";
+      }
+
+      else
+      {
+        $sql = "insert into `registration`(username, password) values('$username', '$password')";
+        $result = $conn->query($sql);
+        if($result)
+        {
+          echo "Registration Successfull!";
+        }
+
+        else
+        {
+          echo "Registration Failed! Try again later!";
+        }
+      }
+    }
 
     else
-    {
-      echo "ERROR: " . $e->getMessage();
-    }
-  }
+      echo "ERROR during registration!";
 }
 ?>
 
@@ -63,7 +66,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
       <input type="password" placeholder="Enter Password" name="psw" required>
 
       <label>
-        <input type="checkbox" name="remember" style="margin-bottom:15px"> By creating an account you agree to our Terms & Privacy
+        <input type="checkbox" name="remember" style="margin-bottom:15px" required> By creating an account you agree to our Terms
+        & Privacy
       </label>
 
       <div class="clearfix">
