@@ -6,11 +6,7 @@
 
     $conn = mysqli_connect($HOSTNAME, $USERNAME, $PASSWORD, $DATABASE);
 
-    if($conn)
-    {
-        echo "Connected!";
-    }
-
-    else
+    if(!$conn)
         die(mysqli_error($conn));
+    
 ?>
