@@ -1,12 +1,10 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   include 'connect.php';
   $username = $_POST['username'];
   $password = $_POST['psw'];
+  $signup_success = 0;
+  $user_exists = 0;
 
     $check = "select * from `registration` where username = '$username'";
     $result = $conn->query($check);
@@ -16,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $num = mysqli_num_rows($result);
       if($num != 0)
       {
-        echo "Username alrady exists!";
+        $user_exists = 1;
       }
 
       else
@@ -25,18 +23,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = $conn->query($sql);
         if($result)
         {
-          echo "Registration Successfull!";
+          $signup_success = 1;
         }
 
-        else
-        {
-          echo "Registration Failed! Try again later!";
-        }
+        // else
+        // {
+        //   echo "Registration Failed! Try again later!"; // add this to php
+        // }
       }
     }
 
     else
       echo "ERROR during registration!";
+}
+?>
+
+<?php
+
+if($user_exists)
+{
+  echo'<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Warning!</strong> Username already exists.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+}
+
+if($signup_success)
+{
+  echo'<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Successful!</strong> You are successfully signed up.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
 }
 ?>
 
