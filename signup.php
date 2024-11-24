@@ -67,7 +67,6 @@ if($signup_success)
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
