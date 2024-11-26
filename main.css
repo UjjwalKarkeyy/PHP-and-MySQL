@@ -37,13 +37,13 @@ button:hover {
 }
 
 /* Extra styles for the cancel button */
-.cancelbtn {
+.cancelbtn, .loginbtn {
   padding: 14px 20px;
   background-color: rgb(47, 46, 46);
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+.cancelbtn, .signupbtn,.loginbtn {
   float: left;
   width: 50%;
 }
@@ -57,7 +57,22 @@ button:hover {
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
+  .cancelbtn, .signupbtn, .loginbtn {
     width: 100%;
   }
+}
+
+.home
+{
+  background-color: rgb(33, 34, 42);
+}
+
+.logoutbtn
+{
+  border: none;
+  background-color: rgb(47, 46, 46);
+}
+
+.logoutbtn:hover{
+  background-color: rgb(74, 73, 73);
 }
