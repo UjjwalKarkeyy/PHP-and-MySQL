@@ -2,9 +2,6 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include 'connect.php';
 
-
-
-
     $username = $_POST['username'];
     $password = $_POST['psw'];
     $login = 0;
@@ -28,18 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <?php
-
-if ($login) {
-    echo '<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Success!</strong> You are successfully logged in!
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
-}
 
 if ($invalid) {
     echo '<!-- Bootstrap CSS -->

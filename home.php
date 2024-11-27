@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+  header('location: login.php');
+}
+$username = $_SESSION['username'];
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
@@ -15,8 +23,16 @@
 
 <body>
   <div class="home d-flex align-items-center justify-content-between container-fluid p-4">
-    <h1 class="ps-3">Welcome User!</h1>
-    <a href="#" class="logoutbtn btn btn-primary me-3">Logout</a>
+    <h1 class="ps-3">
+      <?php
+      echo "Welcome " . ucfirst($username) . "!";
+      ?>
+    </h1>
+    <a href="./logout.php" class="logoutbtn btn btn-primary me-3">
+      Logout
+      <?php
+      ?>
+    </a>
   </div>
 
 </body>
